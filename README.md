@@ -1,4 +1,4 @@
-# C Algorithm Library
+# C Algorithm Library [![Build Status](https://travis-ci.org/lekkas/c-algorithms.svg?branch=master)](https://travis-ci.org/lekkas/c-algorithms.svg?branch=master)
 
 **C algorithms** is, as the name implies, a collection of common data structures
 and algorithms implemented as a header-only library in C99.
