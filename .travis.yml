@@ -4,4 +4,9 @@ compiler:
   - gcc
   - clang
 
+before_script:
+  - wget https://googletest.googlecode.com/files/gtest-1.7.0.zip /tmp/gtest-1.7.0.zip
+  - unzip /tmp/gtest-1.7.0.zip
+  - export GTEST_DIR=/tmp/gtest-1.7.0
+
 script: make test
