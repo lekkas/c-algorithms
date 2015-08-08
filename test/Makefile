@@ -34,7 +34,7 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include -I..
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
 # TESTS = sample1_unittest
-TESTS = test_all
+TESTS = test_list test_sort
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -44,7 +44,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 # House-keeping build targets.
 
 all test: $(TESTS)
-	./test_all
+	./test_list && ./test_sort
 
 clean :
 	rm -f $(TESTS) gtest.a gtest_main.a *.o
@@ -77,8 +77,17 @@ gtest_main.a : gtest-all.o gtest_main.o
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
+#test_list.o : $(USER_DIR)/test_list.cc $(GTEST_HEADERS)
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/test_list.cc
+
+test_sort.o : $(USER_DIR)/test_sort.cc $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/test_sort.cc
+
 test_list.o : $(USER_DIR)/test_list.cc $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/test_list.cc
 
-test_all : test_list.o gtest_main.a
+test_list : test_list.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -lpthread -o $@
+
+test_sort : test_sort.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -lpthread -o $@

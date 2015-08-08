@@ -24,7 +24,6 @@
 #define C_ALGOS_MERGESORT_H_
 
 #include "Utils.h"
-#include "Sorting.h"
 #include "Queue.h"
 
 /**

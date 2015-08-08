@@ -24,7 +24,7 @@
 #define C_ALGOS_HEAPSORT_H_
 
 #include "Utils.h"
-#include "Sorting.h"
+
 /**
  * Heapsort
  *

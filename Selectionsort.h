@@ -20,46 +20,25 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUICKSORT_H_
-#define C_ALGOS_QUICKSORT_H_
+#ifndef C_ALGOS_SELECTIONSORT_H_
+#define C_ALGOS_SELECTIONSORT_H_
 
 #include "Utils.h"
 
-/**
- * Quicksort
- */
-void quickSort(int *A, int lo, int hi);
-int partition(int *A, int lo, int hi);
-int choosePivot(int lo, int hi);
+void selectionSort(int *A, int size) {
+  int i, j;
+  int min;
 
-void quickSort(int *A, int lo, int hi) {
-  if (lo < hi) {
-    int p = partition(A, lo, hi);
-    quickSort(A, lo, p - 1);
-    quickSort(A, p + 1, hi);
+  for (j = 0; j < size-1; j++) {
+    min = j;  // Assume min is the first element
+    for (i = j + 1; i < size; i++)
+      if (A[i] < A[min])
+        min = i;
+
+    if (min != j)
+      swap(&A[j], &A[min]);
   }
 }
 
-int partition(int *A, int lo, int hi) {
-  int i;
-  int pivotIndex = choosePivot(lo, hi);
-  int pivotValue = A[pivotIndex];
-  int position = lo;
 
-  swap(&A[hi], &A[pivotIndex]);
-
-  for (i = lo; i < hi; i++) {
-    if (A[i] < pivotValue) {
-      swap(&A[i], &A[position]);
-      position++;
-    }
-  }
-  swap(&A[position], &A[pivotIndex]);
-  return position;
-}
-
-int choosePivot(int lo, int hi) {
-  return hi;
-}
-
-#endif  //  C_ALGOS_QUICKSORT_H_
+#endif  // C_ALGOS_SELECTIONSORT_H_
