@@ -3,11 +3,11 @@ extern "C" {
 #endif
 
 #include <stdio.h>
-#include "Quicksort.h"
-#include "Mergesort.h"
-#include "Heapsort.h"
-#include "Selectionsort.h"
-#include "Insertionsort.h"
+#include "QuickSort.h"
+#include "MergeSort.h"
+#include "HeapSort.h"
+#include "SelectionSort.h"
+#include "InsertionSort.h"
 #include "Utils.h"
 
 #ifdef __cplusplus
