@@ -20,6 +20,8 @@
  * SOFTWARE.
  */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "DoubleList.h"
 
 void printDoubleList(DoubleList *list) {

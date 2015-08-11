@@ -21,6 +21,7 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "SingleList.h"
 
 SingleList *createSingleList(DataOps *ops) {

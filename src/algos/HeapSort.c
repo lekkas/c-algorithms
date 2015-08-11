@@ -60,7 +60,6 @@ void heapify(int *A, int size) {
     bubble_down(A, size, pos);
     pos--;
   }
-  printf("isMaxHeap: %s\n", isMaxHeap(A, size) == 1 ? "y" : "n");
 }
 
 /* Heapsort for max-Heap */

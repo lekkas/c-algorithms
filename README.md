@@ -1,7 +1,7 @@
 # C Algorithm Library [![Build Status](https://travis-ci.org/lekkas/c-algorithms.svg?branch=master)](https://travis-ci.org/lekkas/c-algorithms.svg?branch=master)
 
 **C algorithms** is, as the name implies, a collection of common data structures
-and algorithms implemented as a header-only library in C99.
+and algorithms implemented in C99.
 
 ## Motivation
 
@@ -12,35 +12,19 @@ background and ability to think on her feet. In real life, however, you should
 definitely avoid re-inventing the wheel and use well-established, peer reviewed
 libraries, like Boost for C++.
 
-## Why Header-Only?
+## ~~Why Header-Only?~~ Why *not* Header-Only?
+
+The first version of the library was implemented as header only.
 
 There are trade-offs between shipping a library in a header-only format and
 using separate files for the API and implementation. The header-only approach,
 though not very efficient when building large projects, has one big advantage;
 the library does not need to be separately compiled and you only have to
-`#include` the relevant header file in your source code:
+`#include` the relevant header file in your source code.
 
-**heapsort.c**
-
-```
-#include "Heapsort.h"
-
-int A[] = {4, 5, 1, 8, 5};
-
-int main(void) {
-  ssize_t size = sizeof(A) / sizeof(A[0]);
-
-  HeapSort(A, size);  // Boom!
-
-  return 0;
-}
-```
-
-Compile with:
-
-```
-gcc heapsort.c -I${C_ALGO_DIR} -o heapsort
-```
+However, I eventually settled down to use separate .h and .c files for API and
+implementation because it think it is more intuitive in terms of code
+structure.
 
 ## Testing
 

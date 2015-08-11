@@ -23,6 +23,8 @@
 #ifndef C_ALGOS_GRAPH_H_
 #define C_ALGOS_GRAPH_H_
 
+#include <stdbool.h>
+
 struct Edgenode {
   int y; /* Destination Vertex */
   int weight;

@@ -20,6 +20,7 @@
  * SOFTWARE.
  */
 
+#include <stdlib.h>
 #include "MergeSort.h"
 #include "Utils.h"
 #include "Queue.h"

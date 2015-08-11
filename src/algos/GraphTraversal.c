@@ -20,6 +20,7 @@
  * SOFTWARE.
  */
 
+#include <stdio.h>
 #include <stdbool.h>
 #include "Queue.h"
 #include "GraphTraversal.h"

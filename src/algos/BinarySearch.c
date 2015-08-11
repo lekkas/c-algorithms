@@ -71,7 +71,6 @@ int countOccurencies(int *A, int size, int val) {
   int rightIdx = _bsearchOccurRight(A, 0, size - 1, val);
   int leftIdx = _bsearchOccurLeft(A, 0, size - 1, val);
 
-  printf("leftIdx: %d, rightIdx: %d\n", leftIdx, rightIdx);
   count = rightIdx - leftIdx;
 
   return count;

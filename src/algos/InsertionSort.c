@@ -21,6 +21,7 @@
  */
 
 #include "InsertionSort.h"
+#include "Utils.h"
 
 void insertionSort(int *A, int size) {
   int i, j;
