@@ -20,25 +20,56 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_SELECTIONSORT_H_
-#define C_ALGOS_SELECTIONSORT_H_
-
+#include "MergeSort.h"
 #include "Utils.h"
+#include "Queue.h"
 
-void selectionSort(int *A, int size) {
-  int i, j;
-  int min;
+void mergeSortA(int *A, int lo, int hi) {
+  int middle;
 
-  for (j = 0; j < size-1; j++) {
-    min = j;  // Assume min is the first element
-    for (i = j + 1; i < size; i++)
-      if (A[i] < A[min])
-        min = i;
-
-    if (min != j)
-      swap(&A[j], &A[min]);
+  if (lo < hi) {
+    middle = (int)((lo + hi) / 2);
+    mergeSortA(A, lo, middle);
+    mergeSortA(A, middle + 1, hi);
+    mergeA(A, lo, middle, hi);
   }
 }
 
+void mergeA(int *A, int lo, int mi, int hi) {
+  int i;
+  int *tmp;
 
-#endif  // C_ALGOS_SELECTIONSORT_H_
+  Queue *q1 = createQueue();
+  Queue *q2 = createQueue();
+
+  for (i = lo; i <= mi; i++) {
+    tmp = (int *)malloc(sizeof(int));
+    *tmp = A[i];
+    enqueue(q1, tmp);
+  }
+
+  for (i = mi + 1; i <= hi; i++) {
+    tmp = (int *)malloc(sizeof(int));
+    *tmp = A[i];
+    enqueue(q2, tmp);
+  }
+
+  i = lo;
+  while (!isQueueEmpty(q1) && !isQueueEmpty(q2)) {
+    int el1 = *(int *)peekTail(q1);
+    int el2 = *(int *)peekTail(q2);
+
+    if (el1 <= el2) {
+      A[i++] = *(int *)dequeue(q1);
+    } else {
+      A[i++] = *(int *)dequeue(q2);
+    }
+  }
+
+  while (!isQueueEmpty(q1)) A[i++] = *(int *)dequeue(q1);
+  while (!isQueueEmpty(q2)) A[i++] = *(int *)dequeue(q2);
+
+  delQueue(q1);
+  delQueue(q2);
+}
+

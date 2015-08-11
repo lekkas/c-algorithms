@@ -20,22 +20,59 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#include <stdlib.h>
+#include <string.h>
+#include "Stack.h"
 
-#include "DoubleList.h"
+struct Stack *createStack(void) {
+  struct Stack *s = (struct Stack *)malloc(sizeof(struct Stack));
+  s->list = createSingleList(NULL);
+  return s;
+}
 
-struct Queue {
-  struct DoubleList *list;
-};
+void push(struct Stack *s, void *data) {
+  addSingleListNode(s->list, data);
+}
 
-typedef struct Queue Queue;
+/**
+ * Pop element.
+ *
+ * Params:
+ *
+ * q : The Stack structure
+ *
+ */
+void *pop(struct Stack *s) {
+  struct SingleListNode *item;
+  void *item_data;
 
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
+  item = s->list->head;
+  item_data = (s->list->head) ? s->list->head->data : NULL;
 
-#endif  // C_ALGOS_QUEUE_H_
+  if (item)
+    delSingleListNode(s->list, item);
+
+  return item_data;
+}
+
+/**
+ * peek tail data element
+ *
+ * Params:
+ *
+ * q: the Stack structure
+ * returns pointer to data element or NULL if queue is empty.
+ */
+void *peekHead(struct Stack *s) {
+  return s->list->head ? s->list->head->data: NULL;
+}
+
+int isStackEmpty(struct Stack *s) {
+  return s->list->head ? 0 : 1;
+}
+
+void delStack(struct Stack *s) {
+  delSingleList(s->list);
+  free(s);
+}
+

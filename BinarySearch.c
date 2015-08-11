@@ -20,11 +20,9 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_BINARYSEARCH_H_
-#define C_ALGOS_BINARYSEARCH_H_
+#include "BinarySearch.h"
 
-
-int _binarySearch(int *A, int lo, int hi, int val) {
+static int _binarySearch(int *A, int lo, int hi, int val) {
   int mi = (lo + hi) / 2;   // better: (hi - lo)/2 + lo;
 
   if (lo > hi)
@@ -42,7 +40,7 @@ int binarySearch(int *A, int size, int val) {
   return _binarySearch(A, 0, size - 1, val);
 }
 
-int _bsearchOccurRight(int *A, int lo, int hi, int val) {
+static int _bsearchOccurRight(int *A, int lo, int hi, int val) {
   int mi = (lo + hi) / 2;   //  better: (hi - lo)/2 + lo;
 
   if (lo > hi)
@@ -55,7 +53,7 @@ int _bsearchOccurRight(int *A, int lo, int hi, int val) {
   }
 }
 
-int _bsearchOccurLeft(int *A, int lo, int hi, int val) {
+static int _bsearchOccurLeft(int *A, int lo, int hi, int val) {
   int mi = (lo + hi) / 2;   // better: (hi - lo)/2 + lo;
 
   if (lo > hi)
@@ -78,5 +76,3 @@ int countOccurencies(int *A, int size, int val) {
 
   return count;
 }
-
-#endif  // C_ALGOS_BINARYSEARCH_H_

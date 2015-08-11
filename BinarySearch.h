@@ -20,22 +20,14 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#ifndef C_ALGOS_BINARYSEARCH_H_
+#define C_ALGOS_BINARYSEARCH_H_
 
-#include "DoubleList.h"
+int binarySearch(int *A, int size, int val);
+int countOccurencies(int *A, int size, int val);
 
-struct Queue {
-  struct DoubleList *list;
-};
+static int _binarySearch(int *A, int lo, int hi, int val);
+static int _bsearchOccurLeft(int *A, int lo, int hi, int val);
+static int _bsearchOccurRight(int *A, int lo, int hi, int val);
 
-typedef struct Queue Queue;
-
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
-
-#endif  // C_ALGOS_QUEUE_H_
+#endif  // C_ALGOS_BINARYSEARCH_H_

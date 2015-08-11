@@ -20,22 +20,9 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#ifndef C_ALGOS_INSERTIONSORT_H_
+#define C_ALGOS_INSERTIONSORT_H_
 
-#include "DoubleList.h"
+void insertionSort(int *A, int size);
 
-struct Queue {
-  struct DoubleList *list;
-};
-
-typedef struct Queue Queue;
-
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
-
-#endif  // C_ALGOS_QUEUE_H_
+#endif  // C_ALGOS_INSERTIONSORT_H_

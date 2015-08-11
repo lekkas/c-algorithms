@@ -23,14 +23,6 @@
 #ifndef C_ALGOS_HASH_H_
 #define C_ALGOS_HASH_H_
 
-unsigned long djb2_hash(char *str) {
-  unsigned long hash = 5381;
-  int c;
-
-  while ( (c = *str++) )
-    hash = ((hash << 5) + hash) + c;  /* hash * 33 + c */
-
-  return hash;
-}
+unsigned long djb2_hash(char *str);
 
 #endif  // C_ALGOS_HASH_H_

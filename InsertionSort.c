@@ -20,46 +20,16 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUICKSORT_H_
-#define C_ALGOS_QUICKSORT_H_
+#include "InsertionSort.h"
 
-#include "Utils.h"
+void insertionSort(int *A, int size) {
+  int i, j;
 
-/**
- * Quicksort
- */
-void quickSort(int *A, int lo, int hi);
-int partition(int *A, int lo, int hi);
-int choosePivot(int lo, int hi);
-
-void quickSort(int *A, int lo, int hi) {
-  if (lo < hi) {
-    int p = partition(A, lo, hi);
-    quickSort(A, lo, p - 1);
-    quickSort(A, p + 1, hi);
-  }
-}
-
-int partition(int *A, int lo, int hi) {
-  int i;
-  int pivotIndex = choosePivot(lo, hi);
-  int pivotValue = A[pivotIndex];
-  int position = lo;
-
-  swap(&A[hi], &A[pivotIndex]);
-
-  for (i = lo; i < hi; i++) {
-    if (A[i] < pivotValue) {
-      swap(&A[i], &A[position]);
-      position++;
+  for (i = 1; i < size; i++) {
+    j = i;
+    while (A[j] < A[j - 1] && j > 0) {
+      swap(&A[j], &A[j - 1]);
+      j = j - 1;
     }
   }
-  swap(&A[position], &A[pivotIndex]);
-  return position;
 }
-
-int choosePivot(int lo, int hi) {
-  return hi;
-}
-
-#endif  //  C_ALGOS_QUICKSORT_H_

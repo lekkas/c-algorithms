@@ -20,22 +20,20 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#ifndef C_ALGOS_HEAPSORT_H_
+#define C_ALGOS_HEAPSORT_H_
 
-#include "DoubleList.h"
+/**
+ * Heapsort
+ *
+ * Min-Heap implementation (i.e. parents dominate children by being smaller)
+ * Therefore, the resulting sorted array will be in ascending order.
+ */
+int getParent(int p);
+int getLeftChild(int p);
+void bubble_down(int *A, int size, int p);
+void heapSort(int *A, int size);
+int isMaxHeap(int *A, int size);
+int isMinHeap(int *A, int size);
 
-struct Queue {
-  struct DoubleList *list;
-};
-
-typedef struct Queue Queue;
-
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
-
-#endif  // C_ALGOS_QUEUE_H_
+#endif  // C_ALGOS_HEAPSORT_H_

@@ -20,23 +20,8 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_HEAPSORT_H_
-#define C_ALGOS_HEAPSORT_H_
-
+#include "HeapSort.h"
 #include "Utils.h"
-
-/**
- * Heapsort
- *
- * Min-Heap implementation (i.e. parents dominate children by being smaller)
- * Therefore, the resulting sorted array will be in ascending order.
- */
-int getParent(int p);
-int getLeftChild(int p);
-void bubble_down(int *A, int size, int p);
-void heapSort(int *A, int size);
-int isMaxHeap(int *A, int size);
-int isMinHeap(int *A, int size);
 
 int getParent(int p) {
   if (p == 0)
@@ -135,5 +120,3 @@ int isMinHeap(int *A, int size) {
   }
   return 1;
 }
-
-#endif  // C_ALGOS_HEAPSORT_H_

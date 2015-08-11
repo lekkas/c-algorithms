@@ -23,9 +23,6 @@
 #ifndef C_ALGOS_UTILS_H_
 #define C_ALGOS_UTILS_H_
 
-#include <stdlib.h>
-#include <stdio.h>
-
 #define MAX_RAND 4098  // Maximum random generated number
 
 struct DataOps {
@@ -36,9 +33,6 @@ struct DataOps {
 
 typedef struct DataOps DataOps;
 
-/**
- * API
- */
 void swap(int *a, int *b);
 int *createIntArray(int size);
 void printIntArray(int *A, int size);
@@ -46,56 +40,5 @@ void deleteIntArray(int *A);
 
 int defaultCmp(void *thiss, void *that);
 int defaultDataToInt(void *data);
-
-/**
- * Implementation
- */
-void swap(int *a, int *b) {
-  if (a == b)
-    return;
-
-  int tmp = *a;
-  *a = *b;
-  *b = tmp;
-}
-
-void printIntArray(int *A, int size) {
-  int i;
-
-  for (i = 0; i < size; i++)
-    printf("%d ", A[i]);
-
-  printf("\n");
-}
-
-int *createIntArray(int size) {
-  int i;
-  int *A = (int *)malloc(size * sizeof(int));
-
-  for (i = 0; i < size; i++)
-    A[i] = rand() % MAX_RAND;
-
-  return A;
-}
-
-void deleteIntArray(int *A) {
-  if (A)
-    free(A);
-}
-
-/* Default function that compares data struct members */
-int defaultCmp(void *thiss, void *that) {
-  if (*(int *)thiss < *(int *)that) {
-    return -1;
-  } else if (*(int *)thiss > *(int *)that) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
-int defaultDataToInt(void *data) {
-  return *(int *)data;
-}
 
 #endif  // C_ALGOS_UTILS_H_

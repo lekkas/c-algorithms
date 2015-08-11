@@ -20,22 +20,15 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#include "Hash.h"
 
-#include "DoubleList.h"
+unsigned long djb2_hash(char *str) {
+  unsigned long hash = 5381;
+  int c;
 
-struct Queue {
-  struct DoubleList *list;
-};
+  while ( (c = *str++) )
+    hash = ((hash << 5) + hash) + c;  /* hash * 33 + c */
 
-typedef struct Queue Queue;
+  return hash;
+}
 
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
-
-#endif  // C_ALGOS_QUEUE_H_

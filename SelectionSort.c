@@ -20,22 +20,21 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#include "SelectionSort.h"
+#include "Utils.h"
 
-#include "DoubleList.h"
+void selectionSort(int *A, int size) {
+  int i, j;
+  int min;
 
-struct Queue {
-  struct DoubleList *list;
-};
+  for (j = 0; j < size-1; j++) {
+    min = j;  // Assume min is the first element
+    for (i = j + 1; i < size; i++)
+      if (A[i] < A[min])
+        min = i;
 
-typedef struct Queue Queue;
+    if (min != j)
+      swap(&A[j], &A[min]);
+  }
+}
 
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
-
-#endif  // C_ALGOS_QUEUE_H_

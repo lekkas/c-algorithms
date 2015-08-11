@@ -20,19 +20,55 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_INSERTIONSORT_H_
-#define C_ALGOS_INSERTIONSORT_H_
+#include <stdlib.h>
+#include <stdio.h>
+#include "Utils.h"
 
-void insertionSort(int *A, int size) {
-  int i, j;
+void swap(int *a, int *b) {
+  if (a == b)
+    return;
 
-  for (i = 1; i < size; i++) {
-    j = i;
-    while (A[j] < A[j - 1] && j > 0) {
-      swap(&A[j], &A[j - 1]);
-      j = j - 1;
-    }
+  int tmp = *a;
+  *a = *b;
+  *b = tmp;
+}
+
+void printIntArray(int *A, int size) {
+  int i;
+
+  for (i = 0; i < size; i++)
+    printf("%d ", A[i]);
+
+  printf("\n");
+}
+
+int *createIntArray(int size) {
+  int i;
+  int *A = (int *)malloc(size * sizeof(int));
+
+  for (i = 0; i < size; i++)
+    A[i] = rand() % MAX_RAND;
+
+  return A;
+}
+
+void deleteIntArray(int *A) {
+  if (A)
+    free(A);
+}
+
+/* Default function that compares data struct members */
+int defaultCmp(void *thiss, void *that) {
+  if (*(int *)thiss < *(int *)that) {
+    return -1;
+  } else if (*(int *)thiss > *(int *)that) {
+    return 1;
+  } else {
+    return 0;
   }
 }
 
-#endif  // C_ALGOS_INSERTIONSORT_H_
+int defaultDataToInt(void *data) {
+  return *(int *)data;
+}
+

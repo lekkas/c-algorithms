@@ -20,22 +20,56 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#include <stdlib.h>
+#include <string.h>
+#include "Queue.h"
 
-#include "DoubleList.h"
+Queue *createQueue(void) {
+  Queue *q = (Queue *)malloc(sizeof(Queue));
+  q->list = createDoubleList(NULL);
+  return q;
+}
 
-struct Queue {
-  struct DoubleList *list;
-};
+void enqueue(Queue *q, void *data) {
+  addDoubleListNodeHead(q->list, data);
+}
 
-typedef struct Queue Queue;
+/**
+ * Dequeue element.
+ *
+ * Params:
+ *
+ * q : The Queue structure
+ * Returns pointer to data element of node.*
+ */
+void *dequeue(Queue *q) {
+  struct DoubleListNode *tail;
+  void *data;
 
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
+  tail = q->list->tail;
+  data = tail ? tail->data : NULL;
 
-#endif  // C_ALGOS_QUEUE_H_
+  delDoubleListNode(q->list, tail);
+  return data;
+}
+
+/**
+ * peek tail data element
+ *
+ * Params:
+ *
+ * q: the Queue structure
+ * returns pointer to data element or NULL if queue is empty.
+ */
+void *peekTail(Queue *q) {
+  return q->list->tail ? q->list->tail->data: NULL;
+}
+
+int isQueueEmpty(Queue *q) {
+  return q->list->tail ? 0 : 1;
+}
+
+void delQueue(Queue *q) {
+  delDoubleList(q->list);
+  free(q);
+}

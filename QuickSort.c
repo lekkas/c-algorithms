@@ -20,22 +20,35 @@
  * SOFTWARE.
  */
 
-#ifndef C_ALGOS_QUEUE_H_
-#define C_ALGOS_QUEUE_H_
+#include "QuickSort.h"
+#include "Utils.h"
 
-#include "DoubleList.h"
+void quickSort(int *A, int lo, int hi) {
+  if (lo < hi) {
+    int p = partition(A, lo, hi);
+    quickSort(A, lo, p - 1);
+    quickSort(A, p + 1, hi);
+  }
+}
 
-struct Queue {
-  struct DoubleList *list;
-};
+int partition(int *A, int lo, int hi) {
+  int i;
+  int pivotIndex = choosePivot(lo, hi);
+  int pivotValue = A[pivotIndex];
+  int position = lo;
 
-typedef struct Queue Queue;
+  swap(&A[hi], &A[pivotIndex]);
 
-Queue *createQueue(void);
-void enqueue(Queue *q, void *data);
-void *dequeue(Queue *q);
-void *peekTail(Queue *q);
-int isQueueEmpty(Queue *q);
-void delQueue(Queue *q);
+  for (i = lo; i < hi; i++) {
+    if (A[i] < pivotValue) {
+      swap(&A[i], &A[position]);
+      position++;
+    }
+  }
+  swap(&A[position], &A[pivotIndex]);
+  return position;
+}
 
-#endif  // C_ALGOS_QUEUE_H_
+int choosePivot(int lo, int hi) {
+  return hi;
+}
