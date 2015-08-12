@@ -17,10 +17,10 @@ extern "C" {
 #include "gtest/gtest.h"
 
 int list1[] = {1};
-int list2[] = {1,2};
-int ulist2[] = {2,1};
-int list3[] = {1,2,3};
-int ulist3[] = {3,1,2};
+int list2[] = {1, 2};
+int ulist2[] = {2, 1};
+int list3[] = {1, 2, 3};
+int ulist3[] = {3, 1, 2};
 
 int isSorted(int *A, int size) {
   int i;
@@ -56,14 +56,14 @@ TEST(QUICKSORT, SORT1) {
 }
 
 TEST(QUICKSORT, SORT2) {
-  int *list = copyList(list2, 2);
+  int *list = copyList(ulist2, 2);
   quickSort(list, 0, 1);
   ASSERT_EQ(1, isSorted(list, 2));
   free(list);
 }
 
 TEST(QUICKSORT, SORT3) {
-  int *list = copyList(list3, 3);
+  int *list = copyList(ulist3, 3);
   quickSort(list, 0, 2);
   ASSERT_EQ(1, isSorted(list, 3));
   free(list);
@@ -85,6 +85,30 @@ TEST(QUICKSORT, SORT50K) {
   free(list);
 }
 
+TEST(QUICKSORT, SORT2_SORTED) {
+  int *list = copyList(list2, 2);
+  quickSort(list, 0, 1);
+  ASSERT_EQ(1, isSorted(list, 2));
+  free(list);
+}
+
+TEST(QUICKSORT, SORT3_SORTED) {
+  int *list = copyList(list3, 3);
+  quickSort(list, 0, 2);
+  ASSERT_EQ(1, isSorted(list, 3));
+  free(list);
+}
+
+TEST(QUICKSORT, SORT10K_SORTED) {
+  int size = 10000;
+  int *list = createIntArray(size);
+  quickSort(list, 0, size - 1);
+
+  quickSort(list, 0, size - 1);
+  ASSERT_EQ(1, isSorted(list, size));
+  free(list);
+}
+
 // MergeSort
 
 TEST(MERGESORT, SORT1) {
@@ -95,14 +119,14 @@ TEST(MERGESORT, SORT1) {
 }
 
 TEST(MERGESORT, SORT2) {
-  int *list = copyList(list2, 2);
+  int *list = copyList(ulist2, 2);
   mergeSortA(list, 0, 1);
   ASSERT_EQ(1, isSorted(list, 2));
   free(list);
 }
 
 TEST(MERGESORT, SORT3) {
-  int *list = copyList(list3, 3);
+  int *list = copyList(ulist3, 3);
   mergeSortA(list, 0, 2);
   ASSERT_EQ(1, isSorted(list, 3));
   free(list);
@@ -124,25 +148,49 @@ TEST(MERGESORT, SORT50K) {
   free(list);
 }
 
+TEST(MERGESORT, SORT2_SORTED) {
+  int *list = copyList(list2, 2);
+  mergeSortA(list, 0, 1);
+  ASSERT_EQ(1, isSorted(list, 2));
+  free(list);
+}
+
+TEST(MERGESORT, SORT3_SORTED) {
+  int *list = copyList(list3, 3);
+  mergeSortA(list, 0, 2);
+  ASSERT_EQ(1, isSorted(list, 3));
+  free(list);
+}
+
+TEST(MERGESORT, SORT10K_SORTED) {
+  int size = 10000;
+  int *list = createIntArray(size);
+  quickSort(list, 0, size - 1);
+
+  mergeSortA(list, 0, size - 1);
+  ASSERT_EQ(1, isSorted(list, size));
+  free(list);
+}
+
 // HeapSort
 
 TEST(HEAPSORT, SORT1) {
   int *list = copyList(list1, 1);
-  heapSort(list, 0);
+  heapSort(list, 1);
   ASSERT_EQ(1, isSorted(list, 1));
   free(list);
 }
 
 TEST(HEAPSORT, SORT2) {
-  int *list = copyList(list2, 2);
-  heapSort(list, 1);
+  int *list = copyList(ulist2, 2);
+  heapSort(list, 2);
   ASSERT_EQ(1, isSorted(list, 2));
   free(list);
 }
 
 TEST(HEAPSORT, SORT3) {
-  int *list = copyList(list3, 3);
-  heapSort(list, 2);
+  int *list = copyList(ulist3, 3);
+  heapSort(list, 3);
   ASSERT_EQ(1, isSorted(list, 3));
   free(list);
 }
@@ -163,25 +211,49 @@ TEST(HEAPSORT, SORT50K) {
   free(list);
 }
 
+TEST(HEAPSORT, SORT2_SORTED) {
+  int *list = copyList(list2, 2);
+  heapSort(list, 2);
+  ASSERT_EQ(1, isSorted(list, 2));
+  free(list);
+}
+
+TEST(HEAPSORT, SORT3_SORTED) {
+  int *list = copyList(list3, 3);
+  heapSort(list, 3);
+  ASSERT_EQ(1, isSorted(list, 3));
+  free(list);
+}
+
+TEST(HEAPSORT, SORT10K_SORTED) {
+  int size = 10000;
+  int *list = createIntArray(size);
+  quickSort(list, 0, size - 1);
+
+  heapSort(list, size);
+  ASSERT_EQ(1, isSorted(list, size));
+  free(list);
+}
+
 // InsertionSort
 
 TEST(INSERTIONSORT, SORT1) {
   int *list = copyList(list1, 1);
-  insertionSort(list, 0);
+  insertionSort(list, 1);
   ASSERT_EQ(1, isSorted(list, 1));
   free(list);
 }
 
 TEST(INSERTIONSORT, SORT2) {
-  int *list = copyList(list2, 2);
-  insertionSort(list, 1);
+  int *list = copyList(ulist2, 2);
+  insertionSort(list, 2);
   ASSERT_EQ(1, isSorted(list, 2));
   free(list);
 }
 
 TEST(INSERTIONSORT, SORT3) {
-  int *list = copyList(list3, 3);
-  insertionSort(list, 2);
+  int *list = copyList(ulist3, 3);
+  insertionSort(list, 3);
   ASSERT_EQ(1, isSorted(list, 3));
   free(list);
 }
@@ -202,25 +274,49 @@ TEST(INSERTIONSORT, SORT50K) {
   free(list);
 }
 
+TEST(INSERTIONSORT, SORT2_SORTED) {
+  int *list = copyList(list2, 2);
+  insertionSort(list, 2);
+  ASSERT_EQ(1, isSorted(list, 2));
+  free(list);
+}
+
+TEST(INSERTIONSORT, SORT3_SORTED) {
+  int *list = copyList(list3, 3);
+  insertionSort(list, 3);
+  ASSERT_EQ(1, isSorted(list, 3));
+  free(list);
+}
+
+TEST(INSERTIONSORT, SORT10K_SORTED) {
+  int size = 10000;
+  int *list = createIntArray(size);
+  quickSort(list, 0, size - 1);
+
+  insertionSort(list, size);
+  ASSERT_EQ(1, isSorted(list, size));
+  free(list);
+}
+
 // SelectionSort
 
 TEST(SELECTIONSORT, SORT1) {
   int *list = copyList(list1, 1);
-  selectionSort(list, 0);
+  selectionSort(list, 1);
   ASSERT_EQ(1, isSorted(list, 1));
   free(list);
 }
 
 TEST(SELECTIONSORT, SORT2) {
-  int *list = copyList(list2, 2);
-  selectionSort(list, 1);
+  int *list = copyList(ulist2, 2);
+  selectionSort(list, 2);
   ASSERT_EQ(1, isSorted(list, 2));
   free(list);
 }
 
 TEST(SELECTIONSORT, SORT3) {
-  int *list = copyList(list3, 3);
-  selectionSort(list, 2);
+  int *list = copyList(ulist3, 3);
+  selectionSort(list, 3);
   ASSERT_EQ(1, isSorted(list, 3));
   free(list);
 }
@@ -241,5 +337,26 @@ TEST(SELECTIONSORT, SORT50K) {
   free(list);
 }
 
-// - other sorting algos
-// - sorted array tsting
+TEST(SELECTIONSORT, SORT2_SORTED) {
+  int *list = copyList(list2, 2);
+  selectionSort(list, 2);
+  ASSERT_EQ(1, isSorted(list, 2));
+  free(list);
+}
+
+TEST(SELECTIONSORT, SORT3_SORTED) {
+  int *list = copyList(list3, 3);
+  selectionSort(list, 3);
+  ASSERT_EQ(1, isSorted(list, 3));
+  free(list);
+}
+
+TEST(SELECTIONSORT, SORT10K_SORTED) {
+  int size = 10000;
+  int *list = createIntArray(size);
+  quickSort(list, 0, size - 1);
+
+  selectionSort(list, size);
+  ASSERT_EQ(1, isSorted(list, size));
+  free(list);
+}
