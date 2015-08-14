@@ -41,7 +41,7 @@ SingleList *createSingleListFromIntArray(int *A, int size) {
  * last inserted node is the new list head
  */
 
-TEST(SingleList, AddOneDeleteOne) {
+TEST(SINGLELIST, ADDONEDELETEONE) {
   SingleList *list = createSingleListFromIntArray(list1, 1);
 
   ASSERT_EQ(1, countNodes(list));
@@ -52,7 +52,7 @@ TEST(SingleList, AddOneDeleteOne) {
   delSingleList(list);
 }
 
-TEST(SingleList, DeleteHead) {
+TEST(SINGLELIST, DELETEHEAD) {
   SingleList *list = createSingleListFromIntArray(list2, 2);
 
   delSingleListNode(list, list->head);
@@ -63,7 +63,7 @@ TEST(SingleList, DeleteHead) {
   delSingleList(list);
 }
 
-TEST(SingleList, DeleteTail) {
+TEST(SINGLELIST, DELETETAIL) {
   SingleList *list = createSingleListFromIntArray(list2, 2);
 
   delSingleListNode(list, list->head->next);
@@ -74,7 +74,7 @@ TEST(SingleList, DeleteTail) {
   delSingleList(list);
 }
 
-TEST(SingleList, SearchAndDeleteTail) {
+TEST(SINGLELIST, SEARCHANDDELETETAIL) {
   SingleList *list = createSingleListFromIntArray(list2, 2);
 
   delSingleListNode(list, searchSingleListNode(list, &list2[0]));
@@ -85,7 +85,7 @@ TEST(SingleList, SearchAndDeleteTail) {
   delSingleList(list);
 }
 
-TEST(SingleList, FindMiddle3) {
+TEST(SINGLELIST, FINDMIDDLE3) {
   SingleList *list = createSingleListFromIntArray(list3, 3);
 
 
@@ -95,7 +95,7 @@ TEST(SingleList, FindMiddle3) {
   delSingleList(list);
 }
 
-TEST(SingleList, FindMiddle4) {
+TEST(SINGLELIST, FINDMIDDLE4) {
   SingleList *list = createSingleListFromIntArray(list4, 4);
 
 
@@ -105,7 +105,7 @@ TEST(SingleList, FindMiddle4) {
   delSingleList(list);
 }
 
-TEST(SingleList, DetectLoop4) {
+TEST(SINGLELIST, DETECTLOOP4) {
   SingleList *list = createSingleListFromIntArray(list4, 4);
 
   SingleListNode *tail = searchSingleListNode(list, &list3[0]);
@@ -117,7 +117,7 @@ TEST(SingleList, DetectLoop4) {
   delSingleList(list);
 }
 
-TEST(SingleList, DetectLoop3) {
+TEST(SINGLELIST, DETECTLOOP3) {
   SingleList *list = createSingleListFromIntArray(list3, 3);
 
   SingleListNode *tail = searchSingleListNode(list, &list3[0]);
@@ -129,7 +129,7 @@ TEST(SingleList, DetectLoop3) {
   delSingleList(list);
 }
 
-TEST(SingleList, ReverseList) {
+TEST(SINGLELIST, REVERSELIST) {
   SingleList *list = createSingleListFromIntArray(list3, 3);
 
   int oldtail = *(int *)searchSingleListNode(list, &list3[0])->data;
