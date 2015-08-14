@@ -7,12 +7,13 @@ struct Stack {
   struct SingleList *list;
 };
 
+typedef struct Stack Stack;
 
-struct Stack *createStack(void);
-void push(struct Stack *s, void *data);
-void *pop(struct Stack *s);
-void *peekHead(struct Stack *s);
-int isStackEmpty(struct Stack *s);
-void delStack(struct Stack *s);
+Stack *createStack(void);
+void push(Stack *s, void *data);
+void *pop(Stack *s);
+void *peekHead(Stack *s);
+int isStackEmpty(Stack *s);
+void delStack(Stack *s);
 
 #endif  // C_ALGOS_STACK_H_

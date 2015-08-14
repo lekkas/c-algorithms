@@ -22,7 +22,7 @@ GT_CXXFLAGS += -w -pthread
 CXXFLAGS += -g -Wall -Wextra
 CPPFLAGS += -isystem $(GTEST_DIR)/include -I $(ALGOS_DIR)
 
-TEST_OBJ = test_list.o test_sort.o
+TEST_OBJ = test_list.o test_sort.o test_stack.o
 
 # For simplicity and to avoid depending on Google Test's
 # implementation details, the dependencies specified below are
