@@ -3,7 +3,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>
-#include "Binarysearch.h"
+#include "BinarySearch.h"
 
 #ifdef __cplusplus
 }

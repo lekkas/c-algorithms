@@ -26,8 +26,4 @@
 int binarySearch(int *A, int size, int val);
 int countOccurencies(int *A, int size, int val);
 
-static int _binarySearch(int *A, int lo, int hi, int val);
-static int _bsearchOccurLeft(int *A, int lo, int hi, int val);
-static int _bsearchOccurRight(int *A, int lo, int hi, int val);
-
 #endif  // C_ALGOS_BINARYSEARCH_H_
