@@ -265,7 +265,7 @@ TEST(INSERTIONSORT, SORT10K) {
   ASSERT_EQ(1, isSorted(list, size));
   free(list);
 }
-
+/*
 TEST(INSERTIONSORT, SORT50K) {
   int size = 50000;
   int *list = createIntArray(size);
@@ -273,7 +273,7 @@ TEST(INSERTIONSORT, SORT50K) {
   ASSERT_EQ(1, isSorted(list, size));
   free(list);
 }
-
+*/
 TEST(INSERTIONSORT, SORT2_SORTED) {
   int *list = copyList(list2, 2);
   insertionSort(list, 2);
@@ -328,7 +328,7 @@ TEST(SELECTIONSORT, SORT10K) {
   ASSERT_EQ(1, isSorted(list, size));
   free(list);
 }
-
+/*
 TEST(SELECTIONSORT, SORT50K) {
   int size = 50000;
   int *list = createIntArray(size);
@@ -336,7 +336,7 @@ TEST(SELECTIONSORT, SORT50K) {
   ASSERT_EQ(1, isSorted(list, size));
   free(list);
 }
-
+*/
 TEST(SELECTIONSORT, SORT2_SORTED) {
   int *list = copyList(list2, 2);
   selectionSort(list, 2);
