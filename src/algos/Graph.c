@@ -61,7 +61,6 @@ void deleteGraph(Graph *G) {
 
 void insert_edge(Graph *G, int x, int y, int weight, bool directed) {
   bool xy = false;
-  bool yx = false;
 
   Edge *edge = G->edges[x];
   while (edge) {
