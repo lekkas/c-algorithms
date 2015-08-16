@@ -40,7 +40,7 @@ void searchInit(Graph *G, enum State *vstate, int *parent) {
  * parent: the array to store parent-child relations, the tree
  *  edges, in escense.
  */
-void BFS(Graph *G, int startV, enum State *vstate, int *parent) {
+void BFS(Graph *G, int startV, enum State *vstate, int *parent, GraphOps *ops) {
   Queue *q;
 
   /* Initialization */
@@ -53,7 +53,9 @@ void BFS(Graph *G, int startV, enum State *vstate, int *parent) {
     int v = *(int *)dequeue(q);
 
     /* Set vertex state to DISCOVERED */
-    ubfs_process_vertex_early(vstate, v);
+    vstate[v] = DISCOVERED;
+    if (ops)
+      ops->processVertexEarly(v);
 
     /* Visit all adjacent vertices of v */
     Edge *list = G->edges[v];
@@ -80,21 +82,28 @@ void BFS(Graph *G, int startV, enum State *vstate, int *parent) {
          * each edge will be processed twice.
          *
          */
-        } else if (G->directed || vstate[*y] != PROCESSED) {
-          ubfs_process_edge(v, *y, parent);
+        }
+
+        if (G->directed || vstate[*y] != PROCESSED) {
+            if (ops)
+              ops->processEdge(v, *y);
         }
 
         list = list->next;
     }
 
     /* Set vertex state to PROCESSED */
-    ubfs_process_vertex_late(vstate, v);
+    vstate[v] = PROCESSED;
+    if (ops)
+      ops->processVertexLate(v);
   }
 }
 
-void DFS(Graph *G, int startV, enum State *vstate, int *parent) {
+void DFS(Graph *G, int startV, enum State *vstate, int *parent, GraphOps *ops) {
   /* Set vertex state to DISCOVERED */
-  udfs_process_vertex_early(vstate, startV);
+  vstate[startV] = DISCOVERED;
+  if (ops)
+    ops->processVertexLate(startV);
 
   Edge *list = G->edges[startV];
   while (list) {
@@ -106,66 +115,20 @@ void DFS(Graph *G, int startV, enum State *vstate, int *parent) {
      */
     if (vstate[*y] == UNDISCOVERED) {
       parent[*y] = startV;
-      udfs_process_edge(startV, *y, vstate, parent);
-      DFS(G, *y, vstate, parent);
+      if (ops)
+        ops->processEdge(startV, *y);
 
-      /** If y was processed then we would be sure that
-       * we would have already seen this edge.
-       */
-    } else if (G->directed || vstate[*y] != PROCESSED) {
-      udfs_process_edge(startV, *y, vstate, parent);
+      DFS(G, *y, vstate, parent, ops);
+    } else if (G->directed || vstate[*y] == PROCESSED) {
+        if (ops)
+          ops->processEdge(startV, *y);
     }
 
     list = list->next;
   }
 
   /* Set vertex state to PROCESSED */
-  udfs_process_vertex_late(vstate, startV);
-}
-
-/**
- * Processing functions for vertices & edges in undirected graphs
- */
-
-/* BFS */
-void ubfs_process_vertex_early(enum State *vstate, int v) {
-  vstate[v] = DISCOVERED;
-  printf("Discovered vertex %d\n", v);
-}
-
-void ubfs_process_vertex_late(enum State *vstate, int v) {
-  vstate[v] = PROCESSED;
-  printf("Processed vertex %d\n", v);
-}
-
-void ubfs_process_edge(int x, int y, int *parent) {
-  if (x != parent[y])
-    printf("Cross Edge: (%d,%d)\n", x, y);
-  else
-    printf("Tree Edge: (%d,%d)\n", x, y);
-}
-
-/* DFS */
-void udfs_process_vertex_early(enum State *vstate, int v) {
-  printf("Enter vertex :%d\n", v);
-  vstate[v] = DISCOVERED;
-}
-
-void udfs_process_vertex_late(enum State *vstate, int v) {
-  vstate[v] = PROCESSED;
-  printf("Processed vertex %d\n", v);
-}
-
-void udfs_process_edge(int x, int y, enum State *vstate, int *parent) {
-  if (vstate[y] == UNDISCOVERED) {
-    printf("Tree Edge: (%d,%d)\n", x, y);
-    return;
-  }
-
-  /* If y == parent[x], then we would have already seen this edge and thus
-   * would be a tree edge.
-   */
-  if (y != parent[x]) {
-    printf("Back Edge: (%d,%d)\n", x, y);
-  }
+  vstate[startV] = PROCESSED;
+  if (ops)
+    ops->processVertexLate(startV);
 }

@@ -31,19 +31,17 @@ enum State {
   PROCESSED
 };
 
+struct GraphOps {
+  void (*processVertexEarly)(int v);
+  void (*processVertexLate)(int v);
+  void (*processEdge)(int x, int y);
+};
+
+typedef struct GraphOps GraphOps;
+
 void searchInit(Graph *G, enum State *vstate, int *parent);
 
-/* BFS */
-void ubfs_process_vertex_early(enum State *vstate, int v);
-void ubfs_process_vertex_late(enum State *vstate, int v);
-void ubfs_process_edge(int x, int y, int *parent);
-
-/* DFS */
-void udfs_process_vertex_early(enum State *vstate, int v);
-void udfs_process_vertex_late(enum State *vstate, int v);
-void udfs_process_edge(int x, int y, enum State *vstate, int *parent);
-
-void BFS(Graph *G, int startV, enum State *vstate, int *parent);
-void DFS(Graph *G, int startV, enum State *vstate, int *parent);
+void BFS(Graph *G, int startV, enum State *vstate, int *parent, GraphOps *ops);
+void DFS(Graph *G, int startV, enum State *vstate, int *parent, GraphOps *ops);
 
 #endif  // C_ALGOS_GRAPHTRAVERSAL_H_
