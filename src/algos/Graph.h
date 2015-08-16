@@ -47,6 +47,6 @@ typedef struct Edgenode Edge;
 
 Graph *createGraph(int nvertices, bool directed);
 void deleteGraph(Graph *G);
-bool insert_edge(Graph *G, int x, int y, int weight, bool directed);
+void insert_edge(Graph *G, int x, int y, int weight, bool directed);
 
 #endif  // C_ALGOS_GRAPH_H_

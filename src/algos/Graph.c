@@ -59,10 +59,7 @@ void deleteGraph(Graph *G) {
   free(G);
 }
 
-/*
- * Returns true if edge was added in the graph
- */
-bool insert_edge(Graph *G, int x, int y, int weight, bool directed) {
+void insert_edge(Graph *G, int x, int y, int weight, bool directed) {
   bool xy = false;
   bool yx = false;
 
@@ -88,29 +85,10 @@ bool insert_edge(Graph *G, int x, int y, int weight, bool directed) {
 
   /* If graph is not directed we also want to add yx
    *
-   * TODO: A smarter way to do this (and avoid repeating ourselves)
+   * A smart way to do this (and avoid repeating ourselves)
    * is to call insert_edge() again with directed == true
    *
    */
-  if (!directed) {
-    edge = G->edges[y];
-    while (edge) {
-      if (edge->y == x) {
-        yx = true;
-        break;
-      }
-      edge = edge->next;
-    }
-
-    if (!yx) {
-      yx = true;
-      edge = (Edge *)malloc(sizeof(Edge));
-      edge->y = x;
-      edge->weight = weight;
-      edge->next = G->edges[y];
-      G->edges[y] = edge;
-    }
-  }
-  return xy;
+  if (!directed)
+    insert_edge(G, y, x, weight, true);
 }
-
