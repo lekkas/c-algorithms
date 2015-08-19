@@ -22,8 +22,8 @@ GT_CXXFLAGS += -w -pthread
 CXXFLAGS += -g -Wall -Wextra
 CPPFLAGS += -isystem $(GTEST_DIR)/include -I $(ALGOS_DIR)
 
-TEST_OBJ = test_list.o test_sort.o test_stack.o test_binary_search.o \
-					 test_binary_tree.o test_graph.o
+TEST_OBJ = list.o sort.o stack.o binary_search.o \
+					 binary_tree.o graph.o
 
 # For simplicity and to avoid depending on Google Test's
 # implementation details, the dependencies specified below are
