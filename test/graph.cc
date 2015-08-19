@@ -64,6 +64,7 @@ TEST(GRAPHTRAVERSAL, DFS_SMOKETEST) {
   enum State *vstate;
   int *parent;
   int nvertices = 10;
+  int nedges = 10;
 
   G = createGraph(nvertices, false);
   q = createQueue();
@@ -75,7 +76,7 @@ TEST(GRAPHTRAVERSAL, DFS_SMOKETEST) {
   ops.processVertexLate = processVertexLate;
   ops.processEdge = processEdge;
 
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < nedges; i++)
     insert_edge(G, graph[i][0], graph[i][1], 0, false); // false for undirected
 
   searchInit(G, vstate, parent);
@@ -91,7 +92,7 @@ TEST(GRAPHTRAVERSAL, DFS_SMOKETEST) {
     free(e);
   }
 
-  ASSERT_EQ(10, cnt);
+  ASSERT_EQ(nedges, cnt);
 
   free(parent);
   free(vstate);
@@ -105,6 +106,7 @@ TEST(GRAPHTRAVERSAL, BFS_SMOKETEST) {
   enum State *vstate;
   int *parent;
   int nvertices = 10;
+  int nedges = 10;
 
   G = createGraph(nvertices, false);
   q = createQueue();
@@ -116,7 +118,7 @@ TEST(GRAPHTRAVERSAL, BFS_SMOKETEST) {
   ops.processVertexLate = processVertexLate;
   ops.processEdge = processEdge;
 
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < nedges; i++)
     insert_edge(G, graph[i][0], graph[i][1], 0, false); // false for undirected
 
   searchInit(G, vstate, parent);
@@ -133,7 +135,7 @@ TEST(GRAPHTRAVERSAL, BFS_SMOKETEST) {
     free(e);
   }
 
-  ASSERT_EQ(10, cnt);
+  ASSERT_EQ(nedges, cnt);
 
   free(parent);
   free(vstate);
