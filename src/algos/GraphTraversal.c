@@ -119,6 +119,15 @@ void DFS(Graph *G, int startV, enum State *vstate, int *parent, GraphOps *ops) {
         ops->processEdge(startV, *y);
 
       DFS(G, *y, vstate, parent, ops);
+      /*
+       * We don't want an if here. Assume we had a simple if (not else if )
+       * and consider graph 1 -> 2. Edge 1-2 will be processed once when 2 is
+       * undiscovered and the algorithm will recurse into 2. Then 2 is marked
+       * as processed. When the algorithm backtracks the second if condition
+       * will hold true (vstate[*y] == PROCESSED and the edge will be processed
+       * twice. Therefore we want an 'else if' to avoid double edge processing
+       * when the algorithm backtracks.
+       */
     } else if (G->directed || vstate[*y] == PROCESSED) {
         if (ops)
           ops->processEdge(startV, *y);
