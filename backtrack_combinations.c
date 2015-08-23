@@ -44,7 +44,7 @@ void printSolution(bool *a, int k) {
   int i;
 
   printf("{ ");
-  for (i=1; i<= k; i++) {
+  for (i = 1; i <= k; i++) {
     if (a[i] == true)
       printf("%d ", i);
   }
@@ -62,7 +62,7 @@ void backtrack(bool *a, int k, int n) {
   } else {
     k = k + 1;
     getCandidates(candidates, &c);
-    for (i=0; i < c; i++) {
+    for (i = 0; i < c; i++) {
       a[k] = candidates[i];
       backtrack(a, k, n);
     }
